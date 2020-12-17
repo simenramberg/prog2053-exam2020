@@ -7,7 +7,21 @@ class EditUser extends LitElement {
     };
   }
 
-  // din kode her
+  updateUser(e) {
+    const dataForm = new FormData(e.target.form);
+    console.log(e)
+    fetch('api/updateUser.php', {
+     method: 'POST',
+     body: dataForm
+    }).then(res=>res.json())
+      .then(data=>{
+        if (data.status=='success') {
+            console.log("User updated successfully");
+        } else {
+            console.log("Failed to update user");
+        }
+      })
+  }
 
 }
 customElements.define('edit-user', EditUser);
